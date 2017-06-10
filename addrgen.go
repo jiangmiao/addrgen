@@ -108,7 +108,8 @@ Options:
 	for i := int64(0); i < mp; i++ {
 		pairs[i] = make(chan string, 2)
 		go func(i int64) {
-			for id := startID + i; id < startID+count; id += mp {
+			for j := i; j < count; j += mp {
+				id := startID + j
 				var buf []byte
 				if *random {
 					buf = make([]byte, 32)
