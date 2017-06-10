@@ -10,7 +10,6 @@ import (
 	"regexp"
 	"runtime"
 	"strconv"
-	"sync"
 
 	"github.com/btcsuite/btcd/btcec"
 	"github.com/btcsuite/btcd/chaincfg"
@@ -103,64 +102,45 @@ Options:
 	}
 
 	pattern := regexp.MustCompile("(PUBKEY|PRIVKEY|ID|BASE)")
-	ch := make(chan int64)
-	go func() {
-		for id := startID; id < startID+count; id++ {
-			ch <- id
-		}
-		close(ch)
-	}()
+	mp := int64(runtime.GOMAXPROCS(0))
+	pairs := make([]chan string, mp)
 
-	m := runtime.GOMAXPROCS(0)
-	m64 := int64(m)
-
-	pairs := make([]chan string, m)
-	for i := 0; i < m; i++ {
+	for i := int64(0); i < mp; i++ {
 		pairs[i] = make(chan string, 2)
+		go func(i int64) {
+			for id := startID + i; id < startID+count; id += mp {
+				var buf []byte
+				if *random {
+					buf = make([]byte, 32)
+					rand.Read(buf)
+				} else {
+					buf = []byte(fmt.Sprintf("%s%d", prefix, id))
+				}
+				key := sha256.Sum256(buf)
+				pair := NewBitcoinPair(key[:])
+
+				r := pattern.ReplaceAllStringFunc(*format, func(m string) string {
+					switch m {
+					case "PUBKEY":
+						return pair.GetPubKey()
+					case "PRIVKEY":
+						return pair.GetPrivKey()
+					case "ID":
+						return strconv.FormatInt(id, 10)
+					case "BASE":
+						return string(buf)
+					default:
+						return m
+					}
+				})
+
+				pairs[id%mp] <- r
+			}
+		}(i)
 	}
 
-	go func() {
-		wg := sync.WaitGroup{}
-		wg.Add(m)
-		for t := 0; t < m; t++ {
-			go func() {
-				defer wg.Done()
-				for id := range ch {
-					var buf []byte
-					if *random {
-						buf = make([]byte, 32)
-						rand.Read(buf)
-					} else {
-						buf = []byte(fmt.Sprintf("%s%d", prefix, id))
-					}
-					key := sha256.Sum256(buf)
-					pair := NewBitcoinPair(key[:])
-
-					r := pattern.ReplaceAllStringFunc(*format, func(m string) string {
-						switch m {
-						case "PUBKEY":
-							return pair.GetPubKey()
-						case "PRIVKEY":
-							return pair.GetPrivKey()
-						case "ID":
-							return strconv.FormatInt(id, 10)
-						case "BASE":
-							return string(buf)
-						default:
-							return m
-						}
-					})
-
-					pairs[id%m64] <- r
-				}
-			}()
-		}
-		wg.Wait()
-		return
-	}()
-
-	for i := startID; i < startID+count; i++ {
-		r := <-pairs[i%m64]
+	for id := startID; id < startID+count; id++ {
+		r := <-pairs[id%mp]
 		fmt.Println(r)
 	}
 }
