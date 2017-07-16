@@ -1,5 +1,9 @@
 Bitcoin Address Generator
 
+Installation:
+
+  go get github.com/bitcoinwisdom/addrgen
+
 Usage:
   addrgen [-sequence] [-format "ID,PUBKEY"] PREFIX [START_ID=1] [COUNT=1000]
   addrgen -random [-format "PRIVKEY,PUBKEY"] [COUNT=1000]
