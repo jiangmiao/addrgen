@@ -55,6 +55,7 @@ func main() {
 	var err error
 	var startID, count int64
 	var prefix string
+	startID = 1
 	count = 1000
 
 	n := len(args)
@@ -89,7 +90,6 @@ Options:
 		}
 		if n > 0 {
 			prefix = args[0]
-			startID = 1
 		}
 		if n > 1 {
 			startID, err = strconv.ParseInt(args[1], 10, 64)
