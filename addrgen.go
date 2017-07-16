@@ -46,7 +46,7 @@ func (b *BitcoinPair) GetPrivKey() string {
 
 func main() {
 	help := flag.Bool("help", false, "")
-	format := flag.String("format", "default", "")
+	format := flag.String("format", "", "")
 	random := flag.Bool("random", false, "")
 	flag.Bool("seq", true, "")
 	flag.Parse()
@@ -60,7 +60,7 @@ func main() {
 	n := len(args)
 
 	if *random {
-		if *format == "default" {
+		if *format == "" {
 			*format = "PRIVKEY PUBKEY"
 		}
 		if n >= 1 {
@@ -68,14 +68,14 @@ func main() {
 			ok(err)
 		}
 	} else {
-		if *format == "default" {
+		if *format == "" {
 			*format = "ID PUBKEY"
 		}
 
 		if n == 0 {
 			fmt.Println(fmt.Sprintf(`Usage:
-  addrgen [-sequence] [-format "ID,PUBKEY"] PREFIX [START_ID=1] [COUNT=1000]
-  addrgen -random [-format "PRIVKEY,PUBKEY"] [COUNT=1000]
+  addrgen [-sequence] [-format "ID PUBKEY"] PREFIX [START_ID=1] [COUNT=1000]
+  addrgen -random [-format "PRIVKEY PUBKEY"] [COUNT=1000]
 
 Options:
   -sequence       the private key is SHA256($PREFIX$ID)
@@ -103,22 +103,22 @@ Options:
 
 	pattern := regexp.MustCompile("(PUBKEY|PRIVKEY|ID|BASE)")
 	mp := int64(runtime.GOMAXPROCS(0))
-	pairs := make([]chan string, mp)
+	rchs := make([]chan string, mp)
 
 	for i := int64(0); i < mp; i++ {
-		pairs[i] = make(chan string, 2)
+		rchs[i] = make(chan string, 2)
 		go func(i int64) {
 			for j := i; j < count; j += mp {
 				id := startID + j
-				var buf []byte
+				var base []byte
 				if *random {
-					buf = make([]byte, 32)
-					rand.Read(buf)
+					base = make([]byte, 32)
+					rand.Read(base)
 				} else {
-					buf = []byte(fmt.Sprintf("%s%d", prefix, id))
+					base = []byte(fmt.Sprintf("%s%d", prefix, id))
 				}
-				key := sha256.Sum256(buf)
-				pair := NewBitcoinPair(key[:])
+				hash := sha256.Sum256(base)
+				pair := NewBitcoinPair(hash[:])
 
 				r := pattern.ReplaceAllStringFunc(*format, func(m string) string {
 					switch m {
@@ -129,19 +129,19 @@ Options:
 					case "ID":
 						return strconv.FormatInt(id, 10)
 					case "BASE":
-						return string(buf)
+						return string(base)
 					default:
 						return m
 					}
 				})
 
-				pairs[id%mp] <- r
+				rchs[id%mp] <- r
 			}
 		}(i)
 	}
 
 	for id := startID; id < startID+count; id++ {
-		r := <-pairs[id%mp]
+		r := <-rchs[id%mp]
 		fmt.Println(r)
 	}
 }
