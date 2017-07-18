@@ -65,7 +65,7 @@ func main() {
 	format := flag.String("format", "", "")
 	random := flag.Bool("random", false, "")
 	version := flag.Bool("version", false, "")
-	flag.Bool("seq", true, "")
+	flag.Bool("sequence", true, "")
 	flag.Parse()
 	args := flag.Args()
 
@@ -85,7 +85,7 @@ func main() {
 		if *format == "" {
 			*format = DEFAULT_RANDOM_FORMAT
 		}
-		if n >= 1 {
+		if n > 0 {
 			count, err = strconv.ParseInt(args[0], 10, 64)
 			ok(err)
 		}
