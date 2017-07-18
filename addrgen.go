@@ -16,6 +16,22 @@ import (
 	"github.com/btcsuite/btcutil"
 )
 
+const (
+	VERSION                 = "0.1"
+	DEFAULT_SEQUENCE_FORMAT = "ID PUBKEY"
+	DEFAULT_RANDOM_FORMAT   = "PRIVKEY PUBKEY"
+	HELP                    = `Usage:
+  addrgen [-sequence] [-format "ID PUBKEY"] PREFIX [START_ID=1] [COUNT=1000]
+  addrgen -random [-format "PRIVKEY PUBKEY"] [COUNT=1000]
+
+Options:
+  -sequence       the private key is SHA256($PREFIX$ID)
+  -random         generate in random
+  -format         available fields ID PRIVKEY PUBKEY BASE
+  -version        show version
+  -help           show help`
+)
+
 func ok(err error) {
 	if err != nil {
 		log.Fatal(err)
@@ -48,6 +64,7 @@ func main() {
 	help := flag.Bool("help", false, "")
 	format := flag.String("format", "", "")
 	random := flag.Bool("random", false, "")
+	version := flag.Bool("version", false, "")
 	flag.Bool("seq", true, "")
 	flag.Parse()
 	args := flag.Args()
@@ -59,10 +76,14 @@ func main() {
 	count = 1000
 
 	n := len(args)
+	if *version {
+		fmt.Println("addrgen version", VERSION)
+		return
+	}
 
 	if *random {
 		if *format == "" {
-			*format = "PRIVKEY PUBKEY"
+			*format = DEFAULT_RANDOM_FORMAT
 		}
 		if n >= 1 {
 			count, err = strconv.ParseInt(args[0], 10, 64)
@@ -70,23 +91,15 @@ func main() {
 		}
 	} else {
 		if *format == "" {
-			*format = "ID PUBKEY"
+			*format = DEFAULT_SEQUENCE_FORMAT
 		}
 
 		if n == 0 {
-			fmt.Println(fmt.Sprintf(`Usage:
-  addrgen [-sequence] [-format "ID PUBKEY"] PREFIX [START_ID=1] [COUNT=1000]
-  addrgen -random [-format "PRIVKEY PUBKEY"] [COUNT=1000]
-
-Options:
-  -sequence       the private key is SHA256($PREFIX$ID)
-  -random         generate in random
-  -format         available fields ID PRIVKEY PUBKEY BASE
-  -help           show help`))
+			fmt.Println(HELP)
 			if *help {
-				os.Exit(1)
+				return
 			}
-			return
+			os.Exit(1)
 		}
 		if n > 0 {
 			prefix = args[0]
