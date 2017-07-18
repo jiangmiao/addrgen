@@ -8,6 +8,7 @@ Options:
   -sequence       the private key is SHA256($PREFIX$ID)
   -random         generate in random
   -format         available fields ID PRIVKEY PUBKEY BASE
+  -version        show version
   -help           show help
 
 Example:
@@ -26,11 +27,11 @@ Example:
   test14 KyPfxQ2koXBfpmyknxDCbpkkztjFRx9JmLQmhnWxEAv2YGDoRash
 
   $ addrgen -random 5
-  L2G6iajrFr2w54SATZXUgc9C7A3Hb5JPAKseS8iQqLPzNkKPa8rq 1BVivwzPJf8dPZS7j6ap7tPPwKtQ5tAzo8
-  KwrBDFgfQkB7ivuDHuQpnGHFKna54dPzk8kaLQva2GVPCxXhyVyt 1KuzAEQoRDvRk4czNSSx8SRgjnuzZGi8tp
-  Kwuw5AFUtdbpE1cAjdx9JhdYsY29noNR4o1yE2V1v3gz637zDmac 1C3dfrUeKWWmo9skBn9yii5DSrcjaB41y
-  L5AmB56e4Gx7B5oXDcHg3MjDuD3wiFKnSmccHXT43wN4gmvwUdU5 1g12HNzvNvqdFuCdf8fqfsVWreibbfFAD
-  Kyrm69Uw3mGMhnqFbv6ihkhWoH3Ph7TRhfLVMcqLgd7Wfd3KK3Xk 1AFXToNybKPW4PuKMY97iWuVpn7iExEbVq
+  KxDxPJZyBdidNhiqGGJERmwFFKwyEVfmybBSjqmSTsxryLpEFnJS 19Q7n2bTgUAdQKpDxdxaSw5Jgnqh3iFRS
+  L1HTfa1XkkWydpM75Dx2LP3PbSiECPNA5kyxtAhSdLR6b3kc5cwq 14uYxoVXN32HvwViZPEBkzocQZJv7DLgoZ
+  L4dhtxq8RSGH79JAdGNhpxDivys6cuw295jviwTRoGtoZoYbWwmY 1875UPaXiUuHygXcjoxkPCGtqf9BvqcVnH
+  L2htKiF4JD8ovytTWtgTySkn8fpU6yfLDnzhkA3CwXutxRdoj5Ef 1JSW3GEieJgCDxfD3fJ6GbaFvmDRPXzg1D
+  L21LvyVxSptCW79jXnH7PVsbbYgxrQNzYhVZ36raanD8uk6Q1zLw 13vXHgpd3QGLKu7Wciq9uECdQuZfRmSW6d
 
 License:
   MIT
