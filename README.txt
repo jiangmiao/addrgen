@@ -3,6 +3,14 @@ Bitcoin Address Generator
 Installation:
   go get github.com/jiangmiao/addrgen
 
+  # or if meets any compile compatible error, try
+
+  go get github.com/golang/dep/cmd/dep
+  go get -d github.com/jiangmiao/addrgen
+  cd /home/miao/go/src/github.com/jiangmiao/addrgen
+  dep ensure
+  go install
+
 Features:
   1. Generate bitcoin address in sequence.
   2. Generate bitcoin address in random.
@@ -35,11 +43,11 @@ Examples:
   test14 KyPfxQ2koXBfpmyknxDCbpkkztjFRx9JmLQmhnWxEAv2YGDoRash
 
   $ addrgen -random 5
-  L4EwCUjgmp8iHuDdJVEzdKvhHetbcUNtNe8nzYQE7ri1ZxNpRPqE 18ZAeG1D1fTbqYNHzALBL1eKEqX8LV1rPn
-  L1QiVPpgk3LwjjLSArREJ12ZZ3X5MGu6irz3MccnLFYdSehPZYzF 1Hvttz2DMwoEv8cJGcV4dAUrZViNgH3biQ
-  KzCKQ8N73cBy5ArnAEGxGudC1oGjDkZBWdV7eD4V7C8EuMjqEwMD 1ADUbTKBnD1ED1MtFVZ1A4YXpbw1kK89hG
-  L2FbQG8p9XECTr1JMTdQqbgT2NXJhuBPHgmh1jehnk4GjSMvU6do 1JbwbbWJccwV2JngGWmCFHNDQ2hketUJbh
-  Ky7qVNaSEqkrDH96sjHm8NvyYn4LEVQoDfmBZwKrMohjmyZALkKU 16QvTUwRVTbihuvj94EYZX6xRxHKPyeDkH
+  L1QWEUaAGW2fqL7Xv72gdzuvXvWiCGTsx6Zyjp4QCEMWyTxQBkSs 1MH4tAB2RwCVWeeWiC5JLCWWjeD6SpctmF
+  KwtjvSRmpGqBJYcKmWvVdnSqFdgcSdBnF1DfEFEry6kKVxia4ECG 16K8BCWMTDZvQUijBfYrB83v1uraKJqKkV
+  L4WNciS28Himvz8nkZNnuYsh7LaS34SSfcvTpMxEzwwdoNcCoEzn 17P9Mm1QW94NpPvpmUr8cAuoLREWdcebY1
+  Kwm2KmrZPbLiuDYiWm1HJ5K8nj5X8V1mWkMCLFrp3qJawci3U7tE 1P21Z5M8zCThxneHFNLFwNXjiwWF74PwX7
+  L3spoNwkVp5znAPBfECLvhnXxZTjfWjG86X8wP81r68BjnjWzrtM 1PvhAp91jboUM6BerLTymqMABeXEoohYe4
 
 License:
   MIT

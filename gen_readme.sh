@@ -8,6 +8,14 @@ Bitcoin Address Generator
 Installation:
   go get github.com/jiangmiao/addrgen
 
+  # or if meets any compile compatible error, try
+
+  go get github.com/golang/dep/cmd/dep
+  go get -d github.com/jiangmiao/addrgen
+  cd $GOPATH/src/github.com/jiangmiao/addrgen
+  dep ensure
+  go install
+
 Features:
   1. Generate bitcoin address in sequence.
   2. Generate bitcoin address in random.

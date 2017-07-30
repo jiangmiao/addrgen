@@ -1,0 +1,7 @@
+[[constraint]]
+  name = "github.com/btcsuite/btcd"
+  revision = "1bdb71328511a5225d6300c3c08a79172f667996"
+
+[[constraint]]
+  name = "github.com/btcsuite/btcutil"
+  revision = "5ffa719c3882fd2ec1e8b9f4978066701c31a343"
