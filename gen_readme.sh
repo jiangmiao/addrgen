@@ -12,7 +12,7 @@ Installation:
 
   go get github.com/golang/dep/cmd/dep
   go get -d github.com/jiangmiao/addrgen
-  cd $GOPATH/src/github.com/jiangmiao/addrgen
+  cd \$GOPATH/src/github.com/jiangmiao/addrgen
   dep ensure
   go install
 

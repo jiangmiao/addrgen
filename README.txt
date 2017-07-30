@@ -7,7 +7,7 @@ Installation:
 
   go get github.com/golang/dep/cmd/dep
   go get -d github.com/jiangmiao/addrgen
-  cd /home/miao/go/src/github.com/jiangmiao/addrgen
+  cd $GOPATH/src/github.com/jiangmiao/addrgen
   dep ensure
   go install
 
@@ -43,11 +43,11 @@ Examples:
   test14 KyPfxQ2koXBfpmyknxDCbpkkztjFRx9JmLQmhnWxEAv2YGDoRash
 
   $ addrgen -random 5
-  L1QWEUaAGW2fqL7Xv72gdzuvXvWiCGTsx6Zyjp4QCEMWyTxQBkSs 1MH4tAB2RwCVWeeWiC5JLCWWjeD6SpctmF
-  KwtjvSRmpGqBJYcKmWvVdnSqFdgcSdBnF1DfEFEry6kKVxia4ECG 16K8BCWMTDZvQUijBfYrB83v1uraKJqKkV
-  L4WNciS28Himvz8nkZNnuYsh7LaS34SSfcvTpMxEzwwdoNcCoEzn 17P9Mm1QW94NpPvpmUr8cAuoLREWdcebY1
-  Kwm2KmrZPbLiuDYiWm1HJ5K8nj5X8V1mWkMCLFrp3qJawci3U7tE 1P21Z5M8zCThxneHFNLFwNXjiwWF74PwX7
-  L3spoNwkVp5znAPBfECLvhnXxZTjfWjG86X8wP81r68BjnjWzrtM 1PvhAp91jboUM6BerLTymqMABeXEoohYe4
+  KwjRkVWPYvCQ78EPs72dcWDDtTvnYWMDx25fB54xnbf81qbcMy19 1BqQkDXVhEXT6DebY7ksmipaHcYcSyzVX3
+  L5jt7nMfVK8iRYeNyTTmbXcUvZBKYnMokbwzVZENvg3YYtwyEcM4 18ZanY5EN87Nopp4kxVXkwNMmiXgt9Qkgs
+  Ky3uFueeBLyzUrJUuEyN1cqnNM4KqCx18m35sWS4R5p4JnBVzC1J 1NHJJ6EUmbw3QipXC7s1MP1A7UnxRLs5Vq
+  KwFJ1bMhbgAMkw6sGGLFecoiZA8PD7JgSWRbpFKMLuDsPgPDGd94 1L2v9C6CyE5dWRYoq7UEYKpJrRUBLC7KnR
+  L1VymFzUG7uwopZj53oxPbx4hfNszZ7snEfH8LDSqwKxm8FkQ4U5 1KxgYcG9NxBFfPi6LugcgZfaE4YdrLPHye
 
 License:
   MIT
