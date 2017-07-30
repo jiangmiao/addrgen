@@ -1,5 +1,13 @@
 Bitcoin Address Generator
 
+Installation:
+  go get github.com/jiangmiao/addrgen
+
+Features:
+  1. Generate bitcoin address in sequence.
+  2. Generate bitcoin address in random.
+  3. High performance by using multicore.
+
 Usage:
   addrgen [-sequence] [-format "ID PUBKEY"] PREFIX [START_ID=1] [COUNT=1000]
   addrgen -random [-format "PRIVKEY PUBKEY"] [COUNT=1000]
@@ -11,7 +19,7 @@ Options:
   -version        show version
   -help           show help
 
-Example:
+Examples:
   $ addrgen test 10 5
   10 1NoDR9vdm6Rz4mnoVYbFxQ35effYXRDxSZ
   11 1EuDwDRuLfAdY6UVBXDms4BdjwoVkBq7dm
@@ -27,11 +35,11 @@ Example:
   test14 KyPfxQ2koXBfpmyknxDCbpkkztjFRx9JmLQmhnWxEAv2YGDoRash
 
   $ addrgen -random 5
-  KxDxPJZyBdidNhiqGGJERmwFFKwyEVfmybBSjqmSTsxryLpEFnJS 19Q7n2bTgUAdQKpDxdxaSw5Jgnqh3iFRS
-  L1HTfa1XkkWydpM75Dx2LP3PbSiECPNA5kyxtAhSdLR6b3kc5cwq 14uYxoVXN32HvwViZPEBkzocQZJv7DLgoZ
-  L4dhtxq8RSGH79JAdGNhpxDivys6cuw295jviwTRoGtoZoYbWwmY 1875UPaXiUuHygXcjoxkPCGtqf9BvqcVnH
-  L2htKiF4JD8ovytTWtgTySkn8fpU6yfLDnzhkA3CwXutxRdoj5Ef 1JSW3GEieJgCDxfD3fJ6GbaFvmDRPXzg1D
-  L21LvyVxSptCW79jXnH7PVsbbYgxrQNzYhVZ36raanD8uk6Q1zLw 13vXHgpd3QGLKu7Wciq9uECdQuZfRmSW6d
+  L4EwCUjgmp8iHuDdJVEzdKvhHetbcUNtNe8nzYQE7ri1ZxNpRPqE 18ZAeG1D1fTbqYNHzALBL1eKEqX8LV1rPn
+  L1QiVPpgk3LwjjLSArREJ12ZZ3X5MGu6irz3MccnLFYdSehPZYzF 1Hvttz2DMwoEv8cJGcV4dAUrZViNgH3biQ
+  KzCKQ8N73cBy5ArnAEGxGudC1oGjDkZBWdV7eD4V7C8EuMjqEwMD 1ADUbTKBnD1ED1MtFVZ1A4YXpbw1kK89hG
+  L2FbQG8p9XECTr1JMTdQqbgT2NXJhuBPHgmh1jehnk4GjSMvU6do 1JbwbbWJccwV2JngGWmCFHNDQ2hketUJbh
+  Ky7qVNaSEqkrDH96sjHm8NvyYn4LEVQoDfmBZwKrMohjmyZALkKU 16QvTUwRVTbihuvj94EYZX6xRxHKPyeDkH
 
 License:
   MIT
