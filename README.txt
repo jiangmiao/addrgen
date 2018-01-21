@@ -11,11 +11,13 @@ Features:
 Usage:
   addrgen [-sequence] [-format "ID PUBKEY"] PREFIX [START_ID=1] [COUNT=1000]
   addrgen -random [-format "PRIVKEY PUBKEY"] [COUNT=1000]
+  addrgen -seed [LENGTH=32]
 
 Options:
   -sequence       the private key is SHA256($PREFIX$ID)
   -random         generate in random
   -format         available fields ID PRIVKEY PUBKEY BASE
+  -seed           generate random string
   -version        show version
   -help           show help
 
@@ -35,11 +37,19 @@ Examples:
   test14 KyPfxQ2koXBfpmyknxDCbpkkztjFRx9JmLQmhnWxEAv2YGDoRash
 
   $ addrgen -random 5
-  L5cAZMXZtUnUTgPxQnmKWdSJuBR3DQP6AXnexb9VbX8ckPEhhQkU 13zPGTa9shGfi6FkH24xmkEj2MAJKBwSZd
-  KzTrwvrSzJ7mVXgR7VzQ7GefDj58bj2RbcJsW1hbN5MKUeW78EqQ 1PimV8TXJ5Jt6R8diSTazBEyhiA9VqVFwE
-  L29iQGxCTRtt8DZWNDTTBxmC3zWiw52hMNcJWTdp7GqmAhFGxTmj 18cEXd2hEChqWejkAqLYw85AWEW7hsJZEz
-  KxKHXG7sDMkY5saeGB4L9Yx7rqMmofTmCCCXy8726ALRDxaPjz6m 1Hnrcr1GTsp3qDDkPDR8oNHcXGMusuNJ8L
-  KwPHu7vUgyceNYnk8kcHVepwEKyE2MBZBLHqop2M6xZfxEVnceNV 1Eea7DuGVbStDPCHkUXi2knazuwVdQqqVL
+  KwiEo2kXaEEZwr1BErrRURx4n1LMHJwfsbK4pjc5NzKw6zYRVWKm 19ta7wGgYzGygA4xA69ooVsPWzqmX41ysQ
+  L4kNSVmv1FZ41DpSGQ7M7mNcrP4EQ5E3eWKxfYfoKZZoDnvkf89o 1D4TtqEiQSAE3ehkEBkUHEF94bAmZGPoK6
+  KzYZh73XV4nndjemXDeW4j4o96RmfeAgs5gMmTqYJ34LLdEAinBy 17p6w6oBWhAf4gNAqQThkqtpuFDLoCPbKN
+  L2wLu11y5gxv1fqUEEuEjGsh45MDB1hP4UtrDtYMiSFQnHKfowzg 1AKMjZCryr5gtSxQzMrkDDiAQ2UwwV2Qfv
+  L2KQuWdnHxzUTpRSMJXtnkgtjqjeJCrXPXvgPh9EYXujcdPVB79x 171mWwADqjg4JThA9CHcykGXNih3eGQ1mu
+
+Security Tips:
+  The source and algorithm of addrgen is public. So the privkey could be enumerated.
+  A long random prefix is highly recommanded for security reason.
+
+  # generate 32 bytes random string
+  $ addrgen -seed
+  azGJNtWp1QSPBmxC5uz3kf273jCPhmy7
 
 License:
   MIT

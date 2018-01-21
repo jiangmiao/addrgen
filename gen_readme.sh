@@ -25,6 +25,14 @@ $example2
   $ addrgen -random 5
 $example3
 
+Security Tips:
+  The source and algorithm of addrgen is public. So the privkey could be enumerated.
+  A long random prefix is highly recommanded for security reason.
+
+  # generate 32 bytes random string
+  $ addrgen -seed
+  azGJNtWp1QSPBmxC5uz3kf273jCPhmy7
+
 License:
   MIT
 EOT
