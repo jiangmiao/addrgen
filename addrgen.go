@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/rand"
 	"crypto/sha256"
+	"encoding/base64"
 	"flag"
 	"fmt"
 	"log"
@@ -23,11 +24,13 @@ const (
 	HELP                    = `Usage:
   addrgen [-sequence] [-format "ID PUBKEY"] PREFIX [START_ID=1] [COUNT=1000]
   addrgen -random [-format "PRIVKEY PUBKEY"] [COUNT=1000]
+  addrgen -seed [LENGTH=32]
 
 Options:
   -sequence       the private key is SHA256($PREFIX$ID)
   -random         generate in random
   -format         available fields ID PRIVKEY PUBKEY BASE
+  -seed           generate random string
   -version        show version
   -help           show help`
 )
@@ -65,6 +68,7 @@ func main() {
 	format := flag.String("format", "", "")
 	random := flag.Bool("random", false, "")
 	version := flag.Bool("version", false, "")
+	seed := flag.Bool("seed", false, "")
 	flag.Bool("sequence", true, "")
 	flag.Parse()
 	args := flag.Args()
@@ -78,6 +82,24 @@ func main() {
 	n := len(args)
 	if *version {
 		fmt.Println("addrgen version", VERSION)
+		return
+	}
+
+	if *seed {
+		var length int64 = 32
+		if n > 0 {
+			length, err = strconv.ParseInt(args[0], 10, 64)
+			ok(err)
+		}
+		var output []byte
+		for int64(len(output)) < length {
+			var buf = make([]byte, length)
+			rand.Read(buf)
+			buf = []byte(base64.RawStdEncoding.EncodeToString(buf))
+			buf = regexp.MustCompile(`([^0-9a-zA-Z]|[0oOiLIl])`).ReplaceAll(buf, []byte(""))
+			output = append(output, buf...)
+		}
+		fmt.Println(string(output[:length]))
 		return
 	}
 
