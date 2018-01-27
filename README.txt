@@ -45,7 +45,7 @@ Examples:
 
 Security Tips:
   The source and algorithm of addrgen is public. So the privkey could be enumerated.
-  A long random prefix is highly recommanded for security reason.
+  A long random prefix is highly recommended for security reason.
 
   # generate 32 bytes random string
   $ addrgen -seed
