@@ -99,7 +99,7 @@ func main() {
 			buf = regexp.MustCompile(`([^0-9a-zA-Z]|[0oOiLIl])`).ReplaceAll(buf, []byte(""))
 			output = append(output, buf...)
 		}
-		fmt.Println(string(output[:length]))
+		fmt.Print(string(output[:length]))
 		return
 	}
 
